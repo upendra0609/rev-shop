@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}">RevShop</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="header">
+    <h2>🛒 RevShop</h2>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <a href="/buyer/dashboard">Dashboard</a>
+    </nav>
+</header>
+
+
+<!-- Page Content -->
+<main class="container" th:replace="${content}">
+</main>
+
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2026 RevShop | Made by Pranjal</p>
+</footer>
+
+</body>
+</html>

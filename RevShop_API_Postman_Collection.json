@@ -1,0 +1,1181 @@
+{
+  "info": {
+    "_postman_id": "revshop-api-collection-2026",
+    "name": "RevShop API - Complete Testing Collection",
+    "description": "Complete Postman collection for RevShop backend API testing with dummy data. Includes authentication, products, cart, orders, and seller operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28022026"
+  },
+  "item": [
+    {
+      "name": "1. AUTHENTICATION",
+      "item": [
+        {
+          "name": "1.1 Register as Customer - John",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"CUSTOMER\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "1.2 Register as Seller - Jane",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Smith\",\n  \"email\": \"jane@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register/seller",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register", "seller"]
+            }
+          }
+        },
+        {
+          "name": "1.3 Register as Customer - Mike",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mike Johnson\",\n  \"email\": \"mike@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"CUSTOMER\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "1.4 Register as Seller - Sarah",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sarah Wilson\",\n  \"email\": \"sarah@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register/seller",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register", "seller"]
+            }
+          }
+        },
+        {
+          "name": "1.5 Login - Jane (Seller)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"seller_token\", jsonData.data.token);",
+                  "  pm.environment.set(\"seller_user_id\", jsonData.data.userId);",
+                  "  console.log('Seller Token: ' + jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jane@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "1.6 Login - John (Customer)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"customer_token\", jsonData.data.token);",
+                  "  pm.environment.set(\"customer_user_id\", jsonData.data.userId);",
+                  "  console.log('Customer Token: ' + jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "1.7 Login - Mike (Customer 2)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"customer_token_2\", jsonData.data.token);",
+                  "  pm.environment.set(\"customer_user_id_2\", jsonData.data.userId);",
+                  "  console.log('Customer Token 2: ' + jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"mike@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "1.8 Login - Sarah (Seller 2)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"seller_token_2\", jsonData.data.token);",
+                  "  pm.environment.set(\"seller_user_id_2\", jsonData.data.userId);",
+                  "  console.log('Seller Token 2: ' + jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sarah@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. PRODUCTS - Add",
+      "item": [
+        {
+          "name": "2.1 Add Product 1 - Gaming Laptop (Jane)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"product_id_1\", jsonData.data.id);",
+                  "  console.log('Product 1 ID: ' + jsonData.data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Gaming Laptop\",\n  \"description\": \"High-performance gaming laptop with RTX 4090\",\n  \"price\": 1999.99,\n  \"quantity\": 5,\n  \"seller\": {\n    \"id\": 2\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/product/add",
+              "host": ["{{base_url}}"],
+              "path": ["product", "add"]
+            }
+          }
+        },
+        {
+          "name": "2.2 Add Product 2 - Wireless Mouse (Jane)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"product_id_2\", jsonData.data.id);",
+                  "  console.log('Product 2 ID: ' + jsonData.data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Wireless Mouse\",\n  \"description\": \"Ergonomic wireless mouse with precision tracking\",\n  \"price\": 49.99,\n  \"quantity\": 50,\n  \"seller\": {\n    \"id\": 2\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/product/add",
+              "host": ["{{base_url}}"],
+              "path": ["product", "add"]
+            }
+          }
+        },
+        {
+          "name": "2.3 Add Product 3 - Mechanical Keyboard (Jane)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"product_id_3\", jsonData.data.id);",
+                  "  console.log('Product 3 ID: ' + jsonData.data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mechanical Keyboard\",\n  \"description\": \"RGB mechanical keyboard with Cherry MX switches\",\n  \"price\": 149.99,\n  \"quantity\": 30,\n  \"seller\": {\n    \"id\": 2\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/product/add",
+              "host": ["{{base_url}}"],
+              "path": ["product", "add"]
+            }
+          }
+        },
+        {
+          "name": "2.4 Add Product 4 - 4K Monitor (Sarah)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"product_id_4\", jsonData.data.id);",
+                  "  console.log('Product 4 ID: ' + jsonData.data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token_2}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"4K Monitor\",\n  \"description\": \"27-inch 4K UHD monitor with HDR support\",\n  \"price\": 599.99,\n  \"quantity\": 10,\n  \"seller\": {\n    \"id\": 4\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/product/add",
+              "host": ["{{base_url}}"],
+              "path": ["product", "add"]
+            }
+          }
+        },
+        {
+          "name": "2.5 Add Product 5 - USB-C Hub (Sarah)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"product_id_5\", jsonData.data.id);",
+                  "  console.log('Product 5 ID: ' + jsonData.data.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token_2}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"USB-C Hub\",\n  \"description\": \"7-in-1 USB-C hub with HDMI, USB 3.0, and power delivery\",\n  \"price\": 79.99,\n  \"quantity\": 40,\n  \"seller\": {\n    \"id\": 4\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/product/add",
+              "host": ["{{base_url}}"],
+              "path": ["product", "add"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. PRODUCTS - View",
+      "item": [
+        {
+          "name": "3.1 Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/product/all",
+              "host": ["{{base_url}}"],
+              "path": ["product", "all"]
+            }
+          }
+        },
+        {
+          "name": "3.2 Get Products by Seller (Jane - ID 2)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/product/all/2",
+              "host": ["{{base_url}}"],
+              "path": ["product", "all", "2"]
+            }
+          }
+        },
+        {
+          "name": "3.3 Get Products by Seller (Sarah - ID 4)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/product/all/4",
+              "host": ["{{base_url}}"],
+              "path": ["product", "all", "4"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. CART OPERATIONS",
+      "item": [
+        {
+          "name": "4.1 Add Product 1 to Cart (John)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cart/add?userId=1&productId=1&qty=1",
+              "host": ["{{base_url}}"],
+              "path": ["cart", "add"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                },
+                {
+                  "key": "productId",
+                  "value": "1"
+                },
+                {
+                  "key": "qty",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "4.2 Add Product 2 to Cart (John) - Qty 2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cart/add?userId=1&productId=2&qty=2",
+              "host": ["{{base_url}}"],
+              "path": ["cart", "add"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                },
+                {
+                  "key": "productId",
+                  "value": "2"
+                },
+                {
+                  "key": "qty",
+                  "value": "2"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "4.3 Add Product 3 to Cart (John)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cart/add?userId=1&productId=3&qty=1",
+              "host": ["{{base_url}}"],
+              "path": ["cart", "add"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                },
+                {
+                  "key": "productId",
+                  "value": "3"
+                },
+                {
+                  "key": "qty",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "4.4 View Cart (John)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cart/1",
+              "host": ["{{base_url}}"],
+              "path": ["cart", "1"]
+            }
+          }
+        },
+        {
+          "name": "4.5 Add Product 4 to Cart (Mike)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token_2}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cart/add?userId=3&productId=4&qty=1",
+              "host": ["{{base_url}}"],
+              "path": ["cart", "add"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "3"
+                },
+                {
+                  "key": "productId",
+                  "value": "4"
+                },
+                {
+                  "key": "qty",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "4.6 Add Product 5 to Cart (Mike) - Qty 3",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token_2}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cart/add?userId=3&productId=5&qty=3",
+              "host": ["{{base_url}}"],
+              "path": ["cart", "add"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "3"
+                },
+                {
+                  "key": "productId",
+                  "value": "5"
+                },
+                {
+                  "key": "qty",
+                  "value": "3"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "4.7 View Cart (Mike)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token_2}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cart/3",
+              "host": ["{{base_url}}"],
+              "path": ["cart", "3"]
+            }
+          }
+        },
+        {
+          "name": "4.8 Remove Product 2 from Cart (John)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cart/remove?userId=1&productId=2",
+              "host": ["{{base_url}}"],
+              "path": ["cart", "remove"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                },
+                {
+                  "key": "productId",
+                  "value": "2"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. ORDERS",
+      "item": [
+        {
+          "name": "5.1 Place Order (John - ID 1)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"order_id_1\", jsonData.data.orderId);",
+                  "  console.log('Order 1 ID: ' + jsonData.data.orderId);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/order/place/1",
+              "host": ["{{base_url}}"],
+              "path": ["order", "place", "1"]
+            }
+          }
+        },
+        {
+          "name": "5.2 Get Saved Addresses (John)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/order/addresses/1",
+              "host": ["{{base_url}}"],
+              "path": ["order", "addresses", "1"]
+            }
+          }
+        },
+        {
+          "name": "5.3 Add Address to Order (John)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"line1\": \"123 Main Street\",\n  \"line2\": \"Apt 4B\",\n  \"city\": \"New York\",\n  \"state\": \"NY\",\n  \"postalCode\": \"10001\",\n  \"country\": \"USA\",\n  \"phoneNumber\": \"555-1234\",\n  \"addressType\": \"HOME\",\n  \"isDefault\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/order/{{order_id_1}}/address",
+              "host": ["{{base_url}}"],
+              "path": ["order", "{{order_id_1}}", "address"]
+            }
+          }
+        },
+        {
+          "name": "5.4 Set Payment Method - CARD (John)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/order/{{order_id_1}}/payment?paymentMethod=CARD",
+              "host": ["{{base_url}}"],
+              "path": ["order", "{{order_id_1}}", "payment"],
+              "query": [
+                {
+                  "key": "paymentMethod",
+                  "value": "CARD"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "5.5 Place Order (Mike - ID 3)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var jsonData = pm.response.json();",
+                  "  pm.environment.set(\"order_id_2\", jsonData.data.orderId);",
+                  "  console.log('Order 2 ID: ' + jsonData.data.orderId);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token_2}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/order/place/3",
+              "host": ["{{base_url}}"],
+              "path": ["order", "place", "3"]
+            }
+          }
+        },
+        {
+          "name": "5.6 Add Address to Order (Mike)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token_2}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"line1\": \"456 Park Avenue\",\n  \"line2\": \"Suite 100\",\n  \"city\": \"Los Angeles\",\n  \"state\": \"CA\",\n  \"postalCode\": \"90001\",\n  \"country\": \"USA\",\n  \"phoneNumber\": \"555-5678\",\n  \"addressType\": \"OFFICE\",\n  \"isDefault\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/order/{{order_id_2}}/address",
+              "host": ["{{base_url}}"],
+              "path": ["order", "{{order_id_2}}", "address"]
+            }
+          }
+        },
+        {
+          "name": "5.7 Set Payment Method - UPI (Mike)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token_2}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/order/{{order_id_2}}/payment?paymentMethod=UPI",
+              "host": ["{{base_url}}"],
+              "path": ["order", "{{order_id_2}}", "payment"],
+              "query": [
+                {
+                  "key": "paymentMethod",
+                  "value": "UPI"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "5.8 View Order History (John)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/order/history/1",
+              "host": ["{{base_url}}"],
+              "path": ["order", "history", "1"]
+            }
+          }
+        },
+        {
+          "name": "5.9 View Order History (Mike)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token_2}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/order/history/3",
+              "host": ["{{base_url}}"],
+              "path": ["order", "history", "3"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. SELLER VIEW ORDERS",
+      "item": [
+        {
+          "name": "6.1 Get Orders for Seller Jane (ID 2)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/seller/orders/2",
+              "host": ["{{base_url}}"],
+              "path": ["seller", "orders", "2"]
+            }
+          }
+        },
+        {
+          "name": "6.2 Get Orders for Seller Sarah (ID 4)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token_2}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/seller/orders/4",
+              "host": ["{{base_url}}"],
+              "path": ["seller", "orders", "4"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. BUYER PROFILE",
+      "item": [
+        {
+          "name": "7.1 Get Buyer Profile (John - ID 1)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/buyer/profile/1",
+              "host": ["{{base_url}}"],
+              "path": ["buyer", "profile", "1"]
+            }
+          }
+        },
+        {
+          "name": "7.2 Get Buyer Profile (Mike - ID 3)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token_2}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/buyer/profile/3",
+              "host": ["{{base_url}}"],
+              "path": ["buyer", "profile", "3"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. PRODUCT UPDATE & DELETE",
+      "item": [
+        {
+          "name": "8.1 Update Product (Jane updates Product 1)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Gaming Laptop Pro\",\n  \"description\": \"Ultra high-performance gaming laptop with RTX 4090 and i9 processor\",\n  \"price\": 2299.99,\n  \"quantity\": 8\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/product/update/1",
+              "host": ["{{base_url}}"],
+              "path": ["product", "update", "1"]
+            }
+          }
+        },
+        {
+          "name": "8.2 Delete Product (Jane deletes Product 2)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/product/delete/2",
+              "host": ["{{base_url}}"],
+              "path": ["product", "delete", "2"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "9. LOGOUT",
+      "item": [
+        {
+          "name": "9.1 Logout (Customer)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        },
+        {
+          "name": "9.2 Logout (Seller)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{seller_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    },
+    {
+      "key": "seller_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "customer_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "customer_token_2",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "seller_token_2",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "order_id_1",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "order_id_2",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "product_id_1",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "product_id_2",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "product_id_3",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "product_id_4",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "product_id_5",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "seller_user_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "customer_user_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "customer_user_id_2",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "seller_user_id_2",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

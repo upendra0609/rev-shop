@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/layout :: layout(~{::section})}">
+
+<section>
+
+<h2>All Orders (Admin)</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>User</th>
+            <th>Items</th>
+            <th>Address</th>
+            <th>Total</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="o : ${orders}">
+            <td th:text="${o.orderId}"></td>
+            <td th:text="${o.userName}"></td>
+            <td>
+                <ul>
+                    <li th:each="it : ${o.items}" th:text="${it}"></li>
+                </ul>
+            </td>
+            <td th:text="${o.address}"></td>
+            <td th:text="${o.totalCost}"></td>
+            <td th:text="${o.status}"></td>
+        </tr>
+    </tbody>
+</table>
+
+</section>
+
+</html>

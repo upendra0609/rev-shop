@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/layout :: layout(~{::section})}">
+
+<section>
+
+<h2>Seller Dashboard</h2>
+
+<div class="card-grid">
+
+    <div class="card">
+        <h3>Add Product</h3>
+        <a href="/seller/product/add">Add</a>
+    </div>
+
+    <div class="card">
+        <h3>My Products</h3>
+        <a href="/seller/products">Manage</a>
+    </div>
+
+</div>
+
+</section>
+
+</html>

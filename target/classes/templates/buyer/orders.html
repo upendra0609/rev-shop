@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{common/layout :: layout(~{::section})}">
+
+<section>
+
+<h2>My Orders</h2>
+
+<div th:if="${orders} == null">
+    <p>To view your orders, go to <a th:href="@{/buyer/orders/1/list}">/buyer/orders/{userId}/list</a> replacing {userId} with your id.</p>
+</div>
+
+<div th:if="${orders} != null">
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Items</th>
+                <th>Address</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="o : ${orders}">
+                <td th:text="${o.orderId}"></td>
+                <td th:text="${o.status}"></td>
+                <td>
+                    <ul>
+                        <li th:each="it : ${o.items}" th:text="${it}"></li>
+                    </ul>
+                </td>
+                <td th:text="${o.address} ?: 'No address'"></td>
+                <td th:text="${o.totalCost}"></td>
+                <td>
+                    <div th:if="${o.address} == null">
+                        <form th:action="@{'/buyer/orders/'+${userId}+'/addAddress/'+${o.orderId}}" method="post">
+                            <input type="text" name="line1" placeholder="Address line 1" required />
+                            <input type="text" name="city" placeholder="City" required />
+                            <input type="text" name="postalCode" placeholder="Postal Code" />
+                            <button type="submit">Add Address</button>
+                        </form>
+                    </div>
+                    <div th:if="${o.address} != null">Address added</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</section>
+
+</html>
